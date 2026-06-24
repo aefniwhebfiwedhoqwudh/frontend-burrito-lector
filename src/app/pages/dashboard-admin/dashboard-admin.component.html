@@ -1,0 +1,111 @@
+<div class="d-flex" style="min-height: 100vh;">
+
+  <!-- Sidebar -->
+  <div class="border-end" style="width: 160px; padding: 20px;">
+    <h5 class="fw-bold mb-4">Burrito Lector</h5>
+    <ul class="list-unstyled">
+      <li class="mb-2">
+        <a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="vistaActual='dash'">Dash</a>
+      </li>
+      <li class="mb-2">
+        <a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="vistaActual='libros'">Libros</a>
+      </li>
+      <li class="mt-4">
+        <a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="salir()">Salir</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenido -->
+  <div class="flex-grow-1">
+
+    <!-- Navbar top -->
+    <div class="border-bottom d-flex justify-content-end px-4 py-2">
+      <span>{{ usuario.nombre }}</span>
+    </div>
+
+    <!-- Vista Dash -->
+    <div class="p-4" *ngIf="vistaActual === 'dash'">
+      <h4 class="mb-4">Dash</h4>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h3>150</h3>
+            <small class="text-muted">Lectores</small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h3>{{ totalLibros }}</h3>
+            <small class="text-muted">Libros</small>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h3>3.5</h3>
+            <small class="text-muted">Promedio de rating</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vista Libros -->
+    <div class="p-4" *ngIf="vistaActual === 'libros'">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Libros</h4>
+        <button class="btn btn-success" (click)="abrirAgregar()">Agregar</button>
+      </div>
+
+      <!-- Formulario agregar/editar -->
+      <div class="card p-3 mb-3" *ngIf="mostrarFormulario">
+        <h5>{{ modoEdicion ? 'Editar Libro' : 'Agregar Libro' }}</h5>
+        <div class="row g-2">
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Título" [(ngModel)]="libroSeleccionado.titulo" />
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Autor" [(ngModel)]="libroSeleccionado.autor" />
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Editorial" [(ngModel)]="libroSeleccionado.editorial" />
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Género" [(ngModel)]="libroSeleccionado.genero" />
+          </div>
+          <div class="col-12">
+            <textarea class="form-control" placeholder="Sinopsis" rows="3" [(ngModel)]="libroSeleccionado.sinopsis"></textarea>
+          </div>
+          <div class="col-12">
+            <input type="file" class="form-control" accept="image/*" (change)="onArchivoSeleccionado($event)" />
+          </div>
+        </div>
+        <div class="mt-3 d-flex gap-2">
+          <button class="btn btn-primary" (click)="guardar()">Guardar</button>
+          <button class="btn btn-secondary" (click)="mostrarFormulario=false">Cancelar</button>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Titulo</th>
+            <th>Autor</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let libro of libros">
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.autor }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm me-2" (click)="abrirEditar(libro)">Editar</button>
+              <button class="btn btn-danger btn-sm" (click)="eliminar(libro.id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="d-flex" style="min-height: 100vh;">
+
+  <!-- Sidebar -->
+  <div class="border-end" style="width: 160px; padding: 20px;">
+    <h5 class="fw-bold mb-4">Burrito Lector</h5>
+    <ul class="list-unstyled">
+      <li class="mb-2"><a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="irGaleria()">Galeria</a></li>
+      <li class="mb-2"><a class="text-decoration-none text-dark" style="cursor:pointer;">Afinidad</a></li>
+      <li class="mt-4"><a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="salir()">Salir</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenido -->
+  <div class="flex-grow-1">
+
+    <!-- Navbar top -->
+    <div class="border-bottom d-flex justify-content-end px-4 py-2">
+      <span>{{ usuario?.nombre }}</span>
+    </div>
+
+    <!-- Tabla Afinidad -->
+    <div class="p-4">
+      <h5 class="mb-3">Afinidad con otros burritos lectores</h5>
+
+      <div *ngIf="tabla.length === 0" class="text-muted">
+        No hay usuarios afines aún o no has calificado libros.
+      </div>
+
+      <table *ngIf="tabla.length > 0" class="table">
+        <thead class="table-light">
+          <tr>
+            <th>Título</th>
+            <th>Lector</th>
+            <th>Su rating</th>
+            <th>Mi rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fila of tabla">
+            <td>{{ fila.titulo }}</td>
+            <td>{{ fila.lector

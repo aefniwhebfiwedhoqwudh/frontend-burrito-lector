@@ -1,0 +1,50 @@
+<div class="d-flex" style="min-height: 100vh;">
+  
+  <!-- Sidebar -->
+  <div class="border-end" style="width: 160px; padding: 20px;">
+    <h5 class="fw-bold mb-4">Burrito Lector</h5>
+    <ul class="list-unstyled">
+      <li class="mb-2"><a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="irGaleria()">Galeria</a></li>
+      <li class="mb-2"><a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="irAfinidad()">Afinidad</a></li>
+      <li class="mt-4"><a class="text-decoration-none text-dark" style="cursor:pointer;" (click)="salir()">Salir</a></li>
+    </ul>
+  </div>
+
+  <!-- Contenido -->
+  <div class="flex-grow-1">
+
+    <!-- Navbar top -->
+    <div class="border-bottom d-flex justify-content-end px-4 py-2">
+      <span>{{ usuario?.nombre }}</span>
+    </div>
+
+    <!-- Galeria -->
+    <div class="p-4">
+      <div class="row g-3">
+        <div class="col-md-4" *ngFor="let libro of libros">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-2"
+                  style="width:36px; height:36px; font-size:14px;">
+                  {{ libro.genero?.charAt(0)?.toUpperCase() }}
+                </div>
+                <div>
+                  <small class="text-muted">Genero</small><br>
+                  <strong>{{ libro.genero }}</strong>
+                </div>
+              </div>
+              <img
+                [src]="libro.imagenUrl ? 'https://backend-practica-2.onrender.com/uploads/' + libro.imagenUrl : 'https://placehold.co/300x200?text=Sin+imagen'"
+                class="img-fluid rounded mb-2"
+                style="height: 160px; width: 100%; object-fit: cover;"
+              />
+              <p class="mb-0 small">Reseña de Libro: {{ libro.titulo }} de {{ libro.autor }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
