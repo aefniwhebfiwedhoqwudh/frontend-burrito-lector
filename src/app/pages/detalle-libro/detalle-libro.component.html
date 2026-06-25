@@ -1,0 +1,57 @@
+<div class="d-flex" style="min-height: 100vh;">
+  
+  <div class="border-end" style="width: 160px; padding: 20px;">
+    <h5 class="fw-bold mb-4">Burrito Lector</h5>
+    <ul class="list-unstyled">
+      <li class="mb-2"><a class="text-decoration-none text-dark" style="cursor:pointer;" routerLink="/dashboard">Galeria</a></li>
+      <li class="mb-2"><a class="text-decoration-none text-dark" style="cursor:pointer;" routerLink="/afinidad">Afinidad</a></li>
+      <li class="mt-4"><a class="text-decoration-none text-dark" style="cursor:pointer;">Salir</a></li>
+    </ul>
+  </div>
+
+  <div class="flex-grow-1 p-5">
+
+    <div *ngIf="libro">
+      <h2 class="mb-4">Reseña de Libro: {{ libro.titulo }}</h2>
+
+      <div class="row">
+        <div class="col-md-4">
+          <img 
+            [src]="libro.imagenUrl ? 'https://backend-practica-2.onrender.com/uploads/' + libro.imagenUrl : 'https://placehold.co/400x300?text=Sin+imagen'" 
+            class="img-fluid rounded" 
+            alt="Portada del libro">
+        </div>
+
+        <div class="col-md-8">
+          <p><strong>Título:</strong> {{ libro.titulo }}</p>
+          <p><strong>Autor:</strong> {{ libro.autor }}</p>
+          <p><strong>Editorial:</strong> {{ libro.editorial }}</p>
+          <p><strong>Género:</strong> {{ libro.genero }}</p>
+
+          <div class="mt-4">
+            <p class="mb-1 fw-bold">Mi puntuación</p>
+            <div class="d-flex">
+              <span 
+                *ngFor="let estrella of estrellas" 
+                (click)="calificar(estrella)"
+                style="cursor: pointer; font-size: 2rem; color: #ffd700;"
+                class="me-1">
+                {{ estrella <= calificacionSeleccionada ? '★' : '☆' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <h4>Sinopsis</h4>
+        <p class="text-secondary" style="white-space: pre-line;">{{ libro.sinopsis }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="!libro">
+      <p>Cargando información del libro...</p>
+    </div>
+
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { DashboardLectorComponent } from './pages/dashboard-lector/dashboard-lec
 import { LoginAdminComponent } from './pages/login-admin/login-admin.component';
 import { DashboardAdminComponent } from './pages/dashboard-admin/dashboard-admin.component';
 import { AfinidadComponent } from './pages/afinidad/afinidad.component';
+import { DetalleLibroComponent } from './pages/detalle-libro/detalle-libro.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,4 +15,6 @@ export const routes: Routes = [
   { path: 'afinidad', component: AfinidadComponent },
   { path: 'admin/login', component: LoginAdminComponent },
   { path: 'admin', component: DashboardAdminComponent },
+  
+  { path: 'galeria/:id', component: DetalleLibroComponent },
 ];
